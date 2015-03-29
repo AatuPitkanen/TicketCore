@@ -1,0 +1,33 @@
+.putForm {
+float:right;
+overflow: hidden;
+}
+
+tr:hover {
+background-color: #99FFFF;
+}
+.table{
+   float:left;
+    height: 50px !important;
+    overflow: auto;
+	border: 1px solid black;
+	table-layout: fixed;
+	position: relative;
+    margin-left: 10px;
+	margin-right: auto;
+	width: 70%;
+}
+body { 
+overflow-y: scrollable;
+padding-top: 70px; 
+margin-left: 10px;
+width: 30%;
+
+}
+
+tbody{
+  overflow-y: scrollable;
+  height: 200px;
+  width: 100%;
+  margin-left: 10px;
+  }

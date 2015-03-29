@@ -1,0 +1,35 @@
+.div1 {  
+    height: 300px !important;
+  overflow: auto;
+  
+}
+.nav-sidebar {
+margin-top: 35px;
+}
+.Otsikko {  
+   margin-top: 50px;
+}
+
+tr:hover {
+background-color: #99FFFF;
+}
+
+.panel-success {
+width: auto;
+overflow: auto;
+margin-left: auto;
+}
+
+tbody{
+  overflow-y: scrollable;
+  height: 200px;
+ 
+  }
+table{
+    height: 100px !important;
+    overflow: auto;
+	width: 90%;
+	border: 1px solid black;
+	position: relative;
+	margin-right: auto;
+}

@@ -1,0 +1,200 @@
+<!DOCTYPE html> 
+
+<html ng-app="MainApp">
+  <head>
+    <meta charset="utf-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min.js"></script>
+	<script src="https:///angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular-route.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular-resource.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- Custom styles for this template -->  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+  <script language="javascript" type="text/javascript" src="TicketController.js"></script>
+  <script language="javascript" type="text/javascript" src="TableFilter.js"></script>
+ 
+</head>
+
+ <body ng-controller="TicketController">
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+   <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+       <span class="sr-only">Toggle navigation</span>
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+       <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#">TicketCore</a>
+   </div>
+   <div id="navbar" class="navbar-collapse collapse">
+     <ul class="nav navbar-nav navbar-right">
+        <li><a href="OTRS-Settings.html">OTRS Settings</a></li>
+        <li><a href="ConnectionSettings.html">Connection Settings</a></li>
+        <li><a href="Management.html">Manage Users</a></li>
+		<li><a href="#">Manage Settings</a></li>
+		<li><a href="#">Log out</a></li>
+     </ul>
+     <form class="navbar-form navbar-right">
+        <input type="text" class="form-control" placeholder="Search...">
+    </form>
+    </div>
+   </div>
+  </nav>
+
+  <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li><a href="#"></a></li>
+           
+		   <label label-default="" class="tree-toggler nav-header">Blue team</label>
+            <ul class="nav  tree active-trial">
+                <li><a href="#">Server 1</a> </li>
+				<li><a href="#">Server 2</a> </li>
+				<li><a href="#">Server 3</a> </li>            
+             </ul>
+			 
+        <label label-default="" class="tree-toggler nav-header">Red team</label>
+            <ul ng-repeat="h in GetQueue track by $index" class="nav  tree active-trial">
+                <li><a href="#">{{ h.id}} {{ h.name }}</a> </li>
+</ul>
+        
+          <ul class="nav nav-sidebar">
+         <form role="form">
+        <div class="checkbox">
+          <label><input type="checkbox" value="">Unread</label>
+		  <form role="form"> 
+		  </div>
+        <div class="checkbox">
+          <label><input type="checkbox" value="">Read</label>
+        </div>
+		<form role="form">
+        <div class="checkbox">
+          <label><input type="checkbox" value="">Changed</label>
+        </div>
+        
+            <form class="navbar-form">
+            <input type="search" class="light-table-filter" data-table="table" placeholder="Filter...">
+          </form>
+          </ul>
+        </div>
+		<div class="Otsikko">
+   <h2 class="page-header">Queues</h2>
+   </div>
+   <div class="div1" >
+        <table class="table" >
+        <thead>
+        <tr>
+            <th>Index</th>
+            <th>ID</th>
+            <th>OTRS-ID</th>
+            <th>Name</th>
+          <!--  <th>Tickets</th> -->
+			<th>Number of changes</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+      <tr ng-repeat="x in GetQueue track by $index">
+	              <td>{{$index}} </td>
+                  <td>{{ x.id}}</td>
+                  <td>{{ x.otrsid }}</td>
+				  <td>{{ x.name }}</td>
+			<!--	  <td>{{ x.tickets }}</td> -->
+            <td> <ul class="nav nav-pills"><a href="">
+            <li class="active" ng-click="TicketCall(x.tickets, $index)" ng-class="{'selected': x.tickets === IdSelected , 'selected2': $index === RowClick}"><span class="badge">2</span></a></li> </ul>
+		     </td>
+        </tr>
+		 </tbody>
+        </table>
+	</div>	
+	<button class="btn-success" type="button" ng-click = "QueueCall()">Update</button>
+	
+      </div>
+<div ng-repeat="i in GetQueueTicket track by $index">
+	<accordion close-others="true"> 
+	<div class="panel panel-success" ng-click="ArticleCall(x.articles)" ng-class="{'selected3': x.articles === IdSelected2}" ng-repeat="x in i track by $index " accordion-group heading=" " >
+<accordion-heading>
+  {{$index}} {{x.id}} {{x.title}}
+  <div class="panel-heading">
+  </div>
+  </accordion-heading>	
+  <div ng-repeat="y in Lista track by $index" id="collapseOne" class="panel-collapse collapse in"> 
+	<p ng-repeat="z in y track by $index">{{z.body}} </p>
+  </div>
+  </accordion-group> 
+<div > 
+  <table class="table" >
+
+  <thead > 
+   <th>Index</th>
+   <th>Id</th>
+    <th>Ticketnumber</th>
+	<th>Title</th>
+	<th>Created</th>
+	<th>Changed</th>
+	<th>Lock</th>
+	<th>CustomersID</th>
+	<th>Priority</th>
+	<th>Responsible</th>
+	<th>State</th>
+	<th>Type</th>
+	</thead>
+	<tbody>
+	 <tr >
+	<td> {{$index}}</td>
+	<td> {{x.id}} </td>
+	<td>{{x.ticketnumber}}</td>
+	<td>{{x.title}}</td>
+	<td>{{x.created}}</td>
+	<td>{{x.changed}}</td>
+	<td>{{x.lock}}</td>
+	<td>{{x.customeruserid}}</td>
+	<td>{{x.priority}}</td>
+	<td>{{x.responsible}}</td>
+	<td>{{x.state}}</td>
+	<td>{{x.type}}</td>
+	</tr>
+	</tbody>
+	</table>
+
+ <table class="table" ng-repeat="y in Lista track by $index">
+   <thead>
+     <tr>
+    <th>Index</th>
+    <th>ID</th>
+	<th>Subject</th>
+	<th>created</th>
+	<th>changed</th>
+	<th>from</th>
+	<th>to</th>
+	<th>cc</th>
+	<th>body</th>
+	<th>sendertype</th>
+	<th>articletype</th>
+	</tr>
+	</thead>
+	<tbody ng-repeat="z in y " >
+	<td> {{$index}}</td>
+	<td>{{z.id}}</td>
+	<td>{{z.subject}}</td>
+	<td>{{z.created}}</td>
+	<td>{{z.changed}}</td>
+	<td>{{z.from}}</td>
+	<td>{{z.to}}</td>
+	<td>{{z.cc}}</td>
+	<td>{{z.body}}</td>
+	<td>{{z.sendertype}}</td>
+	<td>{{z.articletype}}</td>
+	
+	</tbody> 
+ </table>
+</div>
+</div>
+    </accordion-group>
+  </accordion> 
+	</div>
+</html>
