@@ -81,7 +81,7 @@ app.controller('UserController', [ '$http', '$scope', '$resource', function($htt
         });
 };
 $scope.EditUser = function () {
-//paskaa tänne
+
 }
   /*$scope.deleteCall = function($resource) {
  
